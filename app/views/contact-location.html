@@ -1,0 +1,36 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Where did the contact happen?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["contact-location"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["contact-location"], href: "#contact-location" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukInput({
+      id: "contact-location",
+      name: "contact-location",
+      label: {
+        text: "Where did the contact happen?",
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: { text: "For example, 'Hyde Park, London' or 'my garden in Manchester'" },
+      errorMessage: errors["contact-location"] if errors else null,
+      value: data["contact-location"]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
