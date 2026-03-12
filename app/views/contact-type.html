@@ -1,0 +1,43 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What type of contact did you have?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["contact-type"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["contact-type"], href: "#contact-type" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "contact-type",
+      fieldset: {
+        legend: {
+          text: "What type of contact did you have?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "Choose the option that best describes your experience" },
+      errorMessage: errors["contact-type"] if errors else null,
+      value: data["contact-type"],
+      items: [
+        { value: "visual-contact-only", text: "Visual contact only" },
+        { value: "physical-contact", text: "Physical contact" },
+        { value: "communication-exchange", text: "Communication exchange" },
+        { value: "other", text: "Other" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
