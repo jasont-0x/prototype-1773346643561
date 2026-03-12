@@ -1,0 +1,24 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Register your first alien contact" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Register your first alien contact</h1>
+    <p class="govuk-body">Use this service to officially register when you meet an alien for the first time on Earth.</p>
+    <p class="govuk-body">You will need:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>details about when and where you met the alien</li>
+      <li>description of the alien's appearance</li>
+      <li>information about any communication that happened</li>
+    </ul>
+    <p class="govuk-body">It takes around <strong>5 minutes</strong> to complete.</p>
+    {{ govukButton({
+      text: "Start now",
+      href: "/contact-type",
+      isStartButton: true
+    }) }}
+  </div>
+</div>
+{% endblock %}
