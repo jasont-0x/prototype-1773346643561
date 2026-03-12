@@ -1,0 +1,37 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Describe what the alien looked like" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["alien-description"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["alien-description"], href: "#alien-description" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukTextarea({
+      id: "alien-description",
+      name: "alien-description",
+      label: {
+        text: "Describe what the alien looked like",
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: { text: "Include details like height, colour, number of limbs, and any unusual features" },
+      errorMessage: errors["alien-description"] if errors else null,
+      value: data["alien-description"],
+      rows: 5
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
